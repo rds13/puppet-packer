@@ -15,7 +15,7 @@ describe "packer" do
       [
         "rm -rf /tmp/packer* /tmp/0",
         # download the zip to tmp
-        "curl https://releases.hashicorp.com/packer/0.9.9/packer_0.9.9_darwin_amd64.zip?direct > /tmp/packer-v0.9.9.zip",
+        "curl -L https://releases.hashicorp.com/packer/0.9.9/packer_0.9.9_darwin_amd64.zip > /tmp/packer-v0.9.9.zip",
         # extract the zip to tmp spot
         "mkdir /tmp/packer",
         "unzip -o /tmp/packer-v0.9.9.zip -d /tmp/packer",
@@ -33,7 +33,6 @@ describe "packer" do
         :command => command,
         :unless  => "test -x /test/boxen/packer/packer && /test/boxen/packer/packer version | grep '\\bv0.9.9\\b'",
         :user    => "testuser",
-
       })
 
       should contain_file("/test/boxen/env.d/packer.sh")
